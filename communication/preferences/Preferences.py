@@ -4,7 +4,8 @@ from communication.preferences.CriterionName import CriterionName
 from communication.preferences.CriterionValue import CriterionValue
 from communication.preferences.Item import Item
 from communication.preferences.Value import Value
-
+import numpy as np
+import random
 
 class Preferences:
     """Preferences class.
@@ -66,18 +67,47 @@ class Preferences:
     def most_preferred(self, item_list):
         """Returns the most preferred item from a list.
         """
-        # To be completed
+        result = np.array([item.get_score(self) for item in item_list])
+        best_item = item_list[result.argmax()]
         return best_item
-
+    
+    def sorted_item_list(self,item_list):
+        """Returns ordered item_list with score
+        """
+        result = [item.get_score(self) for item in item_list]
+        result,item_list  = zip(*sorted(zip(result,item_list)))
+        return list(item_list)
     def is_item_among_top_10_percent(self, item, item_list):
         """
         Return whether a given item is among the top 10 percent of the preferred items.
 
         :return: a boolean, True means that the item is among the favourite ones
         """
-        # To be completed
-        return is_top_item
+        item_list = self.sorted_item_list(item_list)
+        id_10_percent = len(item_list)*0.1
+        item_10_percent_list = item_list[-int(id_10_percent):] if id_10_percent>1 else item_list[-1:]
+        return item in item_10_percent_list
 
+class Profile_pref:
+    def __init__(self,DISTRIB,nb_value,type_profile = "full_random"):
+        self.profile = {}
+        self.name_criterion  = DISTRIB.index
+        self.nb_value = nb_value
+        for name_col in DISTRIB.index:
+            self.profile[name_col] = []
+            min_val = DISTRIB['min'][name_col]
+            max_val = DISTRIB['max'][name_col]
+            # stable profile
+            if type_profile == "stable":
+                for i in range(1,nb_value-1):
+                    self.profile[name_col].append(random.uniform((i-0.25)*(max_val-min_val)/nb_value+min_val,
+                                                                 (i+0.25)*(max_val-min_val)/nb_value+min_val))
+            if type_profile == "full_random":
+                for i in range(1,nb_value-1):
+                    self.profile[name_col].append(random.uniform(min_val,max_val))
+                self.profile[name_col] = sorted(self.profile[name_col])
+    def get_value(self,val,criterion_name):
+        return self.nb_value-1-float(sum(np.array(self.profile[criterion_name])<=val))
 
 if __name__ == '__main__':
     """Testing the Preferences class.

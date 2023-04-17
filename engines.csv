@@ -1,7 +1,0 @@
-Nom,Description,Production,Consommation,Environnement,Durabilité,Bruit
-ICED,A super cool diesel engine,12000,6.0,4,4,65
-E,A very quiet engine,25000,2.0,1,3,50
-ESS,A very cheap engine for production,8000,5.0,3,4,69
-H,A well-balanced engine,16000,4.0,2,2,66
-HYD,A sustainable engine,50000,3.0,1,1,62
-

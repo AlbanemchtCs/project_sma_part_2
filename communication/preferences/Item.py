@@ -20,7 +20,10 @@ class Item:
         """Returns Item as a String.
         """
         return self.__name + " (" + self.__description + ")"
-
+    def __eq__(a,b):
+        return a.__name == b.__name
+    def __lt__(a,b):
+        return a.__name < b.__name
     def get_name(self):
         """Returns the name of the item.
         """
@@ -42,6 +45,6 @@ class Item:
         criterion_weight = 100
         sum_result = 0
         for criterion_name in preferences.get_criterion_name_list():
-            sum_result = sum_result + criterion_weight * self.get_value(preferences, criterion_name).value
+            sum_result = sum_result + criterion_weight * self.get_value(preferences, criterion_name)
             criterion_weight = criterion_weight / 2
         return sum_result

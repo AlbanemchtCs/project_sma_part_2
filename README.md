@@ -17,7 +17,7 @@ Nous avons décidé d'implémenter notre simulation sur deux agents et cinq item
 L'algorithme proposé a été modifié dans le but de rajouter une contre proposition. Si un agent rejette une proposition en argumentant qu'elle ne respecte pas un critère donné, l'autre agent peut proposer un autre moteur (compromis) qui répond à ce critère et à ses préférences.
 
 ## :card_index_dividers: Segmentation
-Notre répertoire `mesa` est segmenté en 17 fichiers python, 8 fichiers Icon, 4 fichiers xml, un fichier iml, un fichier markdown, deux fichiers .gitinore et deux fichiers texte pour les requirements :
+Notre répertoire est segmenté en 17 fichiers python, 1 fichier csv, 8 fichiers Icon, 4 fichiers xml, un fichier iml, un fichier markdown, deux fichiers .gitinore et deux fichiers texte pour les requirements :
 
 ```bash 
 .
@@ -78,25 +78,25 @@ Notre répertoire `mesa` est segmenté en 17 fichiers python, 8 fichiers Icon, 4
 ## :wrench: Installation
 Pour lancer, nous vous recommandons sur un terminal uniquement :
 
-1. Tout d'abord, assurez-vous que vous avez installé une version `python` supérieure à 3.10. Nous vous conseillons un environnement conda avec la commande suivante : 
+1. Tout d'abord, assurez-vous que vous avez installé une version `python` supérieure à 3.9 et `Anaconda` ou `Miniconda`. 
+
+2. Pour cloner le répertoire, choisissez l’emplacement où vous souhaitez accéder au répertoire sur votre ordinateur, en tapant la commande suivante sur votre Terminal :
 ```bash
-conda create --name sma python=3.10.8
+cd desktop # affichera sur votre Bureau d'ordinateur 
+git clone https://gitlab-student.centralesupelec.fr/albane.michot/project_sma_part_2.git
+cd project_sma_part_2
+```
+
+3. Nous vous conseillons un environnement conda avec la commande suivante qui permet d'installer directement les `requirements` sur l'environnment créé : 
+```bash
+conda create --name mesa --file requirements.txt
 ```
 - Pour activer l'environnement :
 ```bash
-conda activate sma
-```
-- Pour accéder au répertoire : 
-```bash
-cd mesa
+conda activate mesa
 ```
 
-2. Vous devez ensuite installer tous les `requirements` en utilisant la commande suivante :
-```bash
-conda install --file requirements.txt
-```
-
-3. Exécuter la simulation avec la commande suivante : 
+4. Exécuter la simulation avec la commande suivante : 
 ```bash
 python3 pw_argumentation.py
 ```

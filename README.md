@@ -12,15 +12,15 @@ Un constructeur automobile souhaite lancer une nouvelle voiture sur le marché. 
 Pour cela, nous avons implémenté une simulation de dialogue fondée sur l'argumentation entre agents. Des agents représentant l'ingénierie humaine devront interagir les uns avec les autres pour prendre une décision conjointe concernant le choix du meilleur moteur. Les conflits dans l'interaction surviennent lorsque les agents ont des préférences différentes sur les critères, et l'argumentation les aidera à décider quel élément sélectionner.
 
 ## 🤔 Choix techniques
-Nous avons décidé d'implémenter notre simulation sur deux agents et cinq items différents. Les agents ont ainsi différents choix pour argumenter et trouver un compromis. Leurs préférences ont été générées à partir de profils, qui eux sont aléatoires, attribués à chacun des agents.\\
-On prend aléatoirement les profils afin que les agents aient des préférences différentes et ainsi une discussion.\\
-Nous avons rajouté la fonction ``sorted_item_list`` dans la classe ``Preferences`` afin de faciliter l'écriture du code pour ``is_item_among_top_10_percent`` et accélérer le processus de décision côté agent.\\
+Nous avons décidé d'implémenter notre simulation sur deux agents et cinq items différents. Les agents ont ainsi différents choix pour argumenter et trouver un compromis. Leurs préférences ont été générées à partir de profils, qui eux sont aléatoires, attribués à chacun des agents.  
+On prend aléatoirement les profils afin que les agents aient des préférences différentes et ainsi une discussion.  
+Nous avons rajouté la fonction ``sorted_item_list`` dans la classe ``Preferences`` afin de faciliter l'écriture du code pour ``is_item_among_top_10_percent`` et accélérer le processus de décision côté agent.
 
-Nous avons créé un fichier python ``arguments.py`` pour structurer les arguments en rajoutant en plus des phrases des metadata, comme par exemple le type d'argument.  \\
-La structure de la classe ``Argument`` permet de renvoyer une phrase correspondant à l'argument, en plus de faciliter l'utilisation de ces derniers.\\
-Nous avons également rajouté un moyen de comparer les arguments entre eux, en particulier afin de voir s'ils sont égaux pour éviter de réutiliser plusieurs fois le même argument. \\
+Nous avons créé un fichier python ``arguments.py`` pour structurer les arguments en rajoutant en plus des phrases des metadata, comme par exemple le type d'argument.    
+La structure de la classe ``Argument`` permet de renvoyer une phrase correspondant à l'argument, en plus de faciliter l'utilisation de ces derniers.  
+Nous avons également rajouté un moyen de comparer les arguments entre eux, en particulier afin de voir s'ils sont égaux pour éviter de réutiliser plusieurs fois le même argument. 
 
-Le dialogue s'effectue entre deux agents et cinq items (engines). Les agents parlent chacun à leur tour et propose ou argumente sur les critères. S’ils n’ont plus d’arguments, ils peuvent proposer un autre moteur (au maximum 3 moteurs peuvent être proposés).\\
+Le dialogue s'effectue entre deux agents et cinq items (engines). Les agents parlent chacun à leur tour et propose ou argumente sur les critères. S’ils n’ont plus d’arguments, ils peuvent proposer un autre moteur (au maximum 3 moteurs peuvent être proposés).
 
 ## :card_index_dividers: Segmentation
 Notre répertoire est segmenté en 18 fichiers python, 1 fichier csv, un fichier markdown, un fichier .gitinore, deux fichiers texte pour les requirements et un fichier pdf :

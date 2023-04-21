@@ -17,7 +17,7 @@ Nous avons décidé d'implémenter notre simulation sur deux agents et cinq item
 L'algorithme proposé a été modifié dans le but de rajouter une contre proposition. Si un agent rejette une proposition en argumentant qu'elle ne respecte pas un critère donné, l'autre agent peut proposer un autre moteur (compromis) qui répond à ce critère et à ses préférences.
 
 ## :card_index_dividers: Segmentation
-Notre répertoire est segmenté en 17 fichiers python, 1 fichier csv, 8 fichiers Icon, 4 fichiers xml, un fichier iml, un fichier markdown, deux fichiers .gitinore et deux fichiers texte pour les requirements :
+Notre répertoire est segmenté en 18 fichiers python, 1 fichier csv, un fichier markdown, un fichier .gitinore, deux fichiers texte pour les requirements et un fichier pdf :
 
 ```bash 
 .
@@ -26,6 +26,7 @@ Notre répertoire est segmenté en 17 fichiers python, 1 fichier csv, 8 fichiers
 ├── requirements.txt 
 ├── pw_argumentation.py
 ├── engines.csv
+├── Rapport_Projet_SMA_Part_2.pdf
 └── communication
       ├── agent
       │        ├── __init__.py
@@ -58,6 +59,7 @@ Notre répertoire est segmenté en 17 fichiers python, 1 fichier csv, 8 fichiers
 - ``requirements.txt`` contient la liste des modules et des bibliothèques Python qui doivent être installés, ainsi que leur version spécifique.
 - le dossier ``communication`` est la racine de la couche de communication et contient quatre sous-dossiers : ``agent`` (dossier qui contient l'implémentation de la classe agent communicant), ``mailbox`` (dossier qui contient l'implémentation de la classe mailbox), ``message`` (dossier qui contient l'implémentation de la classe message et performative) et ``preferences`` (dossier qui contient l'implémentation des classes de préférences).
 - ``pw_argumentation.py`` est le fichier python qui contient notre classe d'agents et notre modèle pour la simulation d'argumentation.
+- ``arguments.py`` est le fichier python qui permet de 
 - ``engines.csv`` est le fichier csv qui contient les valeurs de nos différents moteurs implémentés.
 
 ## :wrench: Installation

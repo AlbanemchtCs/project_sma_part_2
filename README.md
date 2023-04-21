@@ -57,10 +57,10 @@ Notre répertoire est segmenté en 18 fichiers python, 1 fichier csv, un fichier
 - ``README.md`` contient l'ensemble des informations sur le projet pour pouvoir l'installer.
 - ``.gitignore`` contient les fichiers qui doivent être ignorés lors de l'ajout de fichiers au dépôt Git.
 - ``requirements.txt`` contient la liste des modules et des bibliothèques Python qui doivent être installés, ainsi que leur version spécifique.
-- le dossier ``communication`` est la racine de la couche de communication et contient quatre sous-dossiers : ``agent`` (dossier qui contient l'implémentation de la classe agent communicant), ``mailbox`` (dossier qui contient l'implémentation de la classe mailbox), ``message`` (dossier qui contient l'implémentation de la classe message et performative) et ``preferences`` (dossier qui contient l'implémentation des classes de préférences).
+- le dossier ``communication`` est la racine de la couche de communication et contient quatre sous-dossiers : ``agent`` (dossier qui contient l'implémentation de la classe agent communicant), ``mailbox`` (dossier qui contient l'implémentation de la classe mailbox), ``message`` (dossier qui contient l'implémentation de la classe message et performative) et ``preferences`` (dossier qui contient l'implémentation des classes de préférences). Le fichier ``arguments.py`` est le fichier python qui permet de structurer nos arguments.
 - ``pw_argumentation.py`` est le fichier python qui contient notre classe d'agents et notre modèle pour la simulation d'argumentation.
-- ``arguments.py`` est le fichier python qui permet de 
 - ``engines.csv`` est le fichier csv qui contient les valeurs de nos différents moteurs implémentés.
+- ``Rapport_Projet_SMA_Part_2.pdf`` est le rapport du projet qui contient l'ensemble des informations et justifications d'implémentation.
 
 ## :wrench: Installation
 Pour lancer, nous vous recommandons sur un terminal uniquement :

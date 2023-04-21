@@ -26,10 +26,11 @@ class ArgumentAgent(CommunicatingAgent):
         self.list_items = list_items
         self.committed = False
         self.args = []
+        self.pop = 0
     def step(self):
         super().step()
-            
         list_messages = self.get_new_messages()
+        # compute all messages
         for message in list_messages:
             print(message)
                 
@@ -37,34 +38,45 @@ class ArgumentAgent(CommunicatingAgent):
             if message.get_performative() == MessagePerformative.PROPOSE:
                 self.args = []
                 propose = message.get_content()
+                # get most prefered item
                 pref  = self.list_items_left[-1]
                 if self.preference.is_item_among_top_10_percent(propose, self.list_items):
+                    # case proposition proposes the most prefered item
                     if propose == pref:
+                        #accept
                        m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.ACCEPT, content=pref)
                        self.send_message(m)
                 
                     else:
+                        # propose (impossible in our case with 5 engines)
                         m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.PROPOSE, content=pref)
                         self.send_message(m)
                 else:
+                    #ask why if engine isn't in top 10
                     m =  Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.ASK_WHY, content=propose)
                     self.send_message(m)
             # case COMMIT and ACCEPT
             elif message.get_performative() == MessagePerformative.ACCEPT or message.get_performative() == MessagePerformative.COMMIT:
                 if not self.committed:
+                    # Can commit only one time
                     self.committed = True
                     m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.COMMIT, content=message.get_content())
                     self.send_message(m)
-            
+            # case ASK_WHY
             elif message.get_performative() == MessagePerformative.ASK_WHY:
                 item = message.get_content()
                 send_arg = self.new_argument()
                 self.args.append(send_arg)
-                if send_arg is None:  
-                    self.list_items_left.pop(-1)
-                    other_item = self.list_items_left[-1]
-                    self.args = [] 
-                    m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.PROPOSE, content=other_item)
+                if send_arg is None: 
+                    # case choose an other item
+                    if self.pop <2:
+                        self.list_items_left.pop(-1)
+                        other_item = self.list_items_left[-1]
+                        self.args = [] 
+                        self.pop += 1
+                        m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.PROPOSE, content=other_item)
+                    else:
+                        m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.COMMIT, content=message.get_content())
                     self.send_message(m)
                 else:
                     self.args.append(send_arg)
@@ -75,17 +87,31 @@ class ArgumentAgent(CommunicatingAgent):
                 
                 arg = message.get_content()
                 self.args.append(arg)
-                
+                # first try to find a counter_argument
                 new_args = self.counter_argument(arg)
+                # second try to find a simple argument undiscuss with item and criterion
                 if new_args is None:
                     new_args = self.new_argument()
+                # else Accept
                 if new_args is None:
-                    m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.ACCEPT, content=arg.get_item())
+                    # case choose an other item
+                    if self.pop <2:
+                        self.list_items_left.pop(-1)
+                        other_item = self.list_items_left[-1]
+                        self.args = [] 
+                        self.pop += 1
+                        m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.PROPOSE, content=other_item)
+                    else:
+                        m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.ACCEPT, content=arg.get_item())
                     self.send_message(m)
                 else:
+                    # Sends the argue
                     self.args.append(new_args)
                     m = Message(from_agent=self.get_name(), to_agent=message.get_exp(), message_performative=MessagePerformative.ARGUE, content= new_args)
                     self.send_message(m)
+    """
+    Return a new argument on the most prefered item
+    """
     def new_argument(self):
         
         name_list = self.preference.get_criterion_name_list()
@@ -98,6 +124,9 @@ class ArgumentAgent(CommunicatingAgent):
             else:
                 del a
         return None
+    """
+    return a counter_argument of arg
+    """
     def counter_argument(self,arg):
         if arg.type_arg == 0:# case o_i, c_i = x
             crit = arg.args[0]
@@ -115,6 +144,7 @@ class ArgumentAgent(CommunicatingAgent):
                 a = Argument(self.list_items_left[-1],3,[crit,arg.item])
                 if not a in self.args:
                     return a
+        # case o_j, c_j>c_i exist c
         name_list = self.preference.get_criterion_name_list()
         for crit in name_list:
             val = self.preference.get_value(arg.item,crit)
@@ -125,9 +155,14 @@ class ArgumentAgent(CommunicatingAgent):
                     return a
         
         return None
+    """
+    return preference
+    """
     def get_preference(self):
         return self.preference
-        
+    """
+    generate preferences with profiles
+    """
     def generate_preferences(self,distrib,nb_val):
         #case profile
         self.P = Profile_pref(distrib,nb_val)

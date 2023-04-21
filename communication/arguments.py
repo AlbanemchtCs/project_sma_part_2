@@ -5,7 +5,12 @@ Created on Thu Apr  6 18:20:52 2023
 @author: Admin
 """
 import random 
-
+"""
+Argument : a class to structurate argument and add metadata 
+    item : target item in the argument
+    type_arg : type of argument
+    args : optional arguments (using change for each type_arg) 
+"""
 class Argument:
     def __init__(self,item,type_arg,args):
         self.item = item
@@ -13,6 +18,9 @@ class Argument:
         self.args = args
     def get_item(self):
         return self.item
+    """
+    return a sentence linked with type_arg
+    """
     def __str__(self):
         if self.type_arg == 0:
             r = random.randint(0,1)
@@ -31,5 +39,8 @@ class Argument:
             return self.item.get_name() + " est équivalent à " + self.args[1].get_name()  + " du point de vue de " + self.args[0]
         elif self.type_arg == 3:
             return self.args[1].get_name() + " est mauvais du point de vue de " + self.args[0]
+    """
+    compare to argument (useful to avoid to use two same arguments)
+    """
     def __eq__(a,b):
         return a.item == b.item and a.type_arg  == b.type_arg and a.args == b.args

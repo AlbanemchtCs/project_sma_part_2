@@ -88,6 +88,12 @@ class Preferences:
         item_10_percent_list = item_list[-int(id_10_percent):] if id_10_percent>1 else item_list[-1:]
         return item in item_10_percent_list
 
+"""
+Profile_pref : generate preferences with reference profiles of motor
+    DISTRIB : dataframe with 'min' and 'max' of ENGINES for each columns
+    nb_value : number of values at the end (if nb_value =5, 4 profile are created to split 5 values)
+    type_profile : "full_random" create full random profiles (useful in our case)
+"""
 class Profile_pref:
     def __init__(self,DISTRIB,nb_value,type_profile = "full_random"):
         self.profile = {}
@@ -102,10 +108,13 @@ class Profile_pref:
                 for i in range(1,nb_value-1):
                     self.profile[name_col].append(random.uniform((i-0.25)*(max_val-min_val)/nb_value+min_val,
                                                                  (i+0.25)*(max_val-min_val)/nb_value+min_val))
-            if type_profile == "full_random":
+            elif type_profile == "full_random":
                 for i in range(1,nb_value-1):
                     self.profile[name_col].append(random.uniform(min_val,max_val))
                 self.profile[name_col] = sorted(self.profile[name_col])
+    """
+    get_value  : return value with val of a engine on a criterion (criterion_name)
+    """
     def get_value(self,val,criterion_name):
         return self.nb_value-1-float(sum(np.array(self.profile[criterion_name])<=val))
 

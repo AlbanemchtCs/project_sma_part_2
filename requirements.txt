@@ -1,0 +1,5 @@
+# Librairies
+
+Mesa==1.2.1
+pandas==2.0.0
+prettytable==3.7.0

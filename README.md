@@ -24,45 +24,30 @@ Notre répertoire est segmenté en 17 fichiers python, 1 fichier csv, 8 fichiers
 ├── README.md
 ├── .gitignore
 ├── requirements.txt 
-├── Icon
 ├── pw_argumentation.py
 ├── engines.csv
-├── .idea
-│     ├── inspectionProfiles
-│     │        ├── Icon
-│     │        └── profiles_settings.xml
-│     ├── .gitignore
-│     ├── Icon
-│     ├── mesa.iml
-│     ├── misc.xml
-│     ├── modules.xml
-│     └── workspace.xml
 └── communication
       ├── agent
       │        ├── __init__.py
-      │        ├── CommunicatingAgent.py
-      │        └── Icon
+      │        └── CommunicatingAgent.py
       ├── mailbox
       │        ├── __init__.py
-      │        ├── Mailbox.py
-      │        └── Icon
+      │        └── Mailbox.py
       ├── message
       │        ├── __init__.py
       │        ├── Message.py
       │        ├── MessagePerformative.py
-      │        ├── MessageService.py
-      │        └── Icon
+      │        └── MessageService.py
       ├── preferences
       │        ├── __init__.py
       │        ├── CriterionName.py
       │        ├── CriterionValue.py
       │        ├── Item.py
       │        ├── Preferences.py
-      │        ├── Value.py
-      │        └── Icon
+      │        └── Value.py
       ├── __init__.py
-      ├── Icon
       ├── requirements.txt
+      ├── arguments.py
       └── runtests.py
 
 
